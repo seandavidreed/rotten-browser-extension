@@ -3,21 +3,24 @@ async function find(link) {
 	browser.find.highlightResults();
 }
 
-function receiveExternalLinks(links) {
-	for (let i = 0; i < links.length; i++) {
-		console.log(links[i]);
-	}	
-}
-
-function receiveLink(link) {
-	find(link);
-}
-
 browser.runtime.onMessage.addListener((message) => {
 	if (message.type === "internal") {
-		receiveLink(message.content);
+		console.log("internal");
+		for (let i = 0; i < message.content.length; i++) {
+			let myReq = new Request(message.content[i].href);
+			fetch(myReq).then((response) => {
+				message.content[i].status_code = response.status;
+				console.log(message.content[i]);
+				if (response.status != 200) {
+					find(message.content[i].text);
+				}
+			});
+		}
 	}
 	else if (message.type === "external") {
-		receiveExternalLinks(message.content);
+		console.log("external");
+		for (let i = 0; i < message.content.length; i++) {
+			console.log(message.content[i]);
+		}
 	}
 });

@@ -16,11 +16,22 @@ browser.runtime.onMessage.addListener((message) => {
 				}
 			});
 		}
+		
+		browser.runtime.sendMessage({
+			type: "report-internal",
+			content: message.content
+		});
 	}
 	else if (message.type === "external") {
 		console.log("external");
 		for (let i = 0; i < message.content.length; i++) {
 			console.log(message.content[i]);
 		}
+		
+		browser.runtime.sendMessage({
+			type: "report-external",
+			content: message.content
+		});
 	}
+
 });

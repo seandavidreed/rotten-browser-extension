@@ -1,37 +1,38 @@
 async function find(link) {
+	/* Call find on a link and
+	 * highlight it in webpage. */
 	let result = await browser.find.find(link);
 	browser.find.highlightResults();
 }
 
 browser.runtime.onMessage.addListener((message) => {
-	if (message.type === "internal") {
+	if (message.type === "to-background") {
 		console.log("internal");
-		for (let i = 0; i < message.content.length; i++) {
-			let myReq = new Request(message.content[i].href);
+		for (let i = 0; i < message.internalLinks.length; i++) {
+			let myReq = new Request(message.internalLinks[i].href);
 			fetch(myReq).then((response) => {
-				message.content[i].status_code = response.status;
-				console.log(message.content[i]);
+				message.internalLinks[i].status_code = response.status;
+				console.log(message.internalLinks[i]);
 				if (response.status != 200) {
-					find(message.content[i].text);
+					find(message.internalLinks[i].text);
 				}
 			});
 		}
 		
 		browser.runtime.sendMessage({
 			type: "report-internal",
-			content: message.content
+			content: message.internalLinks
 		});
 	}
-	else if (message.type === "external") {
-		console.log("external");
-		for (let i = 0; i < message.content.length; i++) {
-			console.log(message.content[i]);
-		}
-		
-		browser.runtime.sendMessage({
-			type: "report-external",
-			content: message.content
-		});
+	
+	console.log("external");
+	for (let i = 0; i < message.externalLinks.length; i++) {
+		console.log(message.externalLinks[i]);
 	}
+	
+	browser.runtime.sendMessage({
+		type: "report-external",
+		content: message.externalLinks
+	});
 
 });

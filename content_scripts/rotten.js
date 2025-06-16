@@ -28,13 +28,9 @@ async function getLinks() {
 	}
 
 	browser.runtime.sendMessage({
-		type: "external",
-		content: externalLinks
-	});
-
-	browser.runtime.sendMessage({
-		type: "internal",
-		content: internalLinks
+		type: "to-background",
+		internalLinks: internalLinks,
+		externalLinks: externalLinks
 	});
 }
 

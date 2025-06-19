@@ -13,12 +13,12 @@ browser.runtime.onMessage.addListener(function (message) {
 	if (message.type === "to-background") {
 		for (let i = 0; i < message.internalLinks.length; i++) {
 			// Prepare request for internal link: only requesting header
-			let myReq = new Request(message.internalLinks[i].href, {
+			let request = new Request(message.internalLinks[i].href, {
 				method: "HEAD"
 			});
 			
 			// Fetch the internal link
-			fetch(myReq).then((response) => {
+			fetch(request).then(function (response) {
 				// Highlight the link in page if it doesn't return 200
 				if (response.status != 200) {
 					find(message.internalLinks[i].text);

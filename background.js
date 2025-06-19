@@ -5,34 +5,40 @@ async function find(link) {
 	browser.find.highlightResults();
 }
 
-browser.runtime.onMessage.addListener((message) => {
+/* Listen for message add accept if it is addressed
+ * to this background script. */
+browser.runtime.onMessage.addListener(function (message) {
+	/* Receive message with internalLinks and externalLinks
+	 * from the content script */
 	if (message.type === "to-background") {
-		console.log("internal");
 		for (let i = 0; i < message.internalLinks.length; i++) {
-			let myReq = new Request(message.internalLinks[i].href);
+			// Prepare request for internal link: only requesting header
+			let myReq = new Request(message.internalLinks[i].href, {
+				method: "HEAD"
+			});
+			
+			// Fetch the internal link
 			fetch(myReq).then((response) => {
-				message.internalLinks[i].status_code = response.status;
-				console.log(message.internalLinks[i]);
+				// Highlight the link in page if it doesn't return 200
 				if (response.status != 200) {
 					find(message.internalLinks[i].text);
 				}
+				
+				// Store status in the link object
+				message.internalLinks[i].status_code = response.status;
+				
+				// Send link object to the popup script
+				browser.runtime.sendMessage({
+					type: "internal",
+					content: message.internalLinks[i]
+				});
 			});
 		}
 		
+		// Send external links unmodified to popup script
 		browser.runtime.sendMessage({
-			type: "report-internal",
-			content: message.internalLinks
+			type: "external",
+			content: message.externalLinks
 		});
 	}
-	
-	console.log("external");
-	for (let i = 0; i < message.externalLinks.length; i++) {
-		console.log(message.externalLinks[i]);
-	}
-	
-	browser.runtime.sendMessage({
-		type: "report-external",
-		content: message.externalLinks
-	});
-
 });

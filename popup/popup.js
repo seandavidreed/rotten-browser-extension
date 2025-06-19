@@ -2,6 +2,21 @@ document.addEventListener("click", (info) => {
 	browser.tabs.executeScript({
 		file: "/content_scripts/rotten.js",
 	});
+
+	let display = document.getElementById("display");
+	display.style.border = "2px solid #F00";
+	
+	let tableHeader1 = document.createElement("th");
+	tableHeader1.innerText = "Link";
+
+	let tableHeader2 = document.createElement("th");
+	tableHeader2.innerText = "Status";
+
+	let tableHeaderRow = document.createElement("tr");
+	tableHeaderRow.appendChild(tableHeader1);
+	tableHeaderRow.appendChild(tableHeader2);
+
+	display.appendChild(tableHeaderRow);
 });
 
 browser.runtime.onMessage.addListener((message) => {

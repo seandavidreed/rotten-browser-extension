@@ -15,17 +15,21 @@ browser.runtime.onMessage.addListener((message) => {
 		link.innerText = message.content.text;
 		link.href = message.content.href;
 		
+		// Create table cell for link
+		let linkCell = document.createElement("td");
+		linkCell.appendChild(link);
+
 		// Create status code element
-		let statusCode = document.createElement("span");
+		let statusCode = document.createElement("td");
 		statusCode.innerText = message.content.statusCode;
 		
-		// Create div and append link and status code
-		let line = document.createElement("div");
-		line.appendChild(link);
-		line.appendChild(statusCode);
+		// Create table row
+		let row = document.createElement("tr");
+		row.appendChild(linkCell);
+		row.appendChild(statusCode);
 
 		// Append line to the main display element
-		display.appendChild(line);
+		display.appendChild(row);
 	}
 	else if (message.type === "external") {
 		// Create link

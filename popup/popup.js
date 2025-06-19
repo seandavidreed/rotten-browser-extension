@@ -28,17 +28,12 @@ browser.runtime.onMessage.addListener((message) => {
 		display.appendChild(line);
 	}
 	else if (message.type === "external") {
-		let linkType = document.createElement("h1");
-		linkType.innerText = "External Links";
-		display.appendChild(linkType);
-		
-		for (let i = 0; i < message.content.length; i++) {
-			let elem = document.createElement("a");
-			elem.innerText = message.content[i].text;
-			elem.href = message.content[i].href;
-			elem.style.display = "block";
-			display.appendChild(elem);
-		}
+		// Create link
+		let link = document.createElement("a");
+		link.innerText = message.content.text;
+		link.href = message.content.href;
+		link.style.display = "block";
+		display.appendChild(link);
 	}
 
 });

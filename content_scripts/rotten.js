@@ -15,7 +15,7 @@ async function getLinks() {
 			internalLinks.push({
 				href: link.href,
 				text: link.innerText,
-				status_code: ""
+				statusCode: ""
 			});
 
 		}

@@ -26,7 +26,7 @@ browser.runtime.onMessage.addListener(function (message) {
 				}
 				
 				// Store status in the link object
-				link.status_code = response.status;
+				link.statusCode = response.status;
 				
 				// Send link object to the popup script
 				browser.runtime.sendMessage({

@@ -17,7 +17,7 @@ browser.runtime.onMessage.addListener((message) => {
 		
 		// Create status code element
 		let statusCode = document.createElement("span");
-		statusCode.innerText = message.content.status_code;
+		statusCode.innerText = message.content.statusCode;
 		
 		// Create div and append link and status code
 		let line = document.createElement("div");

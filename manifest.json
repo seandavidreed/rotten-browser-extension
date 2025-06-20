@@ -3,14 +3,20 @@
 	"name": "Rotten",
 	"version": "1.0",
 
-	"permissions": ["activeTab", "tabs", "find"],
+	"permissions": ["<all_urls>", "tabs", "find"],
 
-	"browser_action": {
-		"default_icon": {
-			"96": "icons/apple-icon.jpg"
-		},
-		"default_title": "Rotten",
-		"default_popup": "/popup/popup.html"
+	"sidebar_action": {
+		"default_title": "My Sidebar",
+		"default_panel": "sidebar/panel.html",
+		"default_icon": "icons/apple-icon.jpg"
+	},
+	
+	"commands": {
+		"_execute_sidebar_action": {
+			"suggested_key": {
+				"default": "Alt+Shift+P"
+			}
+		}	
 	},
 
 	"background": {

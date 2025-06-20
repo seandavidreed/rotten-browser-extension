@@ -28,7 +28,7 @@ document.addEventListener("click", function () {
 });
 
 browser.runtime.onMessage.addListener((message) => {
-	// Get element for displaying results from popup.html
+	// Get element for displaying results from panel.html
 	let display = document.getElementById("display");
 
 	// Handle internal link

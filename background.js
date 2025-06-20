@@ -28,7 +28,7 @@ browser.runtime.onMessage.addListener(function (message) {
 				// Store status in the link object
 				link.statusCode = response.status;
 				
-				// Send link object to the popup script
+				// Send link object to the panel script
 				browser.runtime.sendMessage({
 					type: "internal",
 					content: link
@@ -37,7 +37,7 @@ browser.runtime.onMessage.addListener(function (message) {
 		}
 		// Handle external links
 		for (let link of message.externalLinks) {
-			// Send external link unmodified to popup script
+			// Send external link unmodified to panel script
 			browser.runtime.sendMessage({
 				type: "external",
 				content: link

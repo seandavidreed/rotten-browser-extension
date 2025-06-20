@@ -1,22 +1,30 @@
-document.addEventListener("click", (info) => {
-	browser.tabs.executeScript({
-		file: "/content_scripts/rotten.js",
-	});
+document.addEventListener("click", function () {
+	if (this.activeElement.id === "get-links") {
+		browser.tabs.executeScript({
+			file: "/content_scripts/rotten.js",
+		});
 
-	let display = document.getElementById("display");
-	display.style.border = "2px solid #F00";
-	
-	let tableHeader1 = document.createElement("th");
-	tableHeader1.innerText = "Link";
+		let display = document.getElementById("display");
+		display.style.border = "2px solid #F00";
+		
+		let tableHeader1 = document.createElement("th");
+		tableHeader1.innerText = "Link";
 
-	let tableHeader2 = document.createElement("th");
-	tableHeader2.innerText = "Status";
+		let tableHeader2 = document.createElement("th");
+		tableHeader2.innerText = "Status";
 
-	let tableHeaderRow = document.createElement("tr");
-	tableHeaderRow.appendChild(tableHeader1);
-	tableHeaderRow.appendChild(tableHeader2);
+		let tableHeaderRow = document.createElement("tr");
+		tableHeaderRow.appendChild(tableHeader1);
+		tableHeaderRow.appendChild(tableHeader2);
 
-	display.appendChild(tableHeaderRow);
+		display.appendChild(tableHeaderRow);
+		
+		let getLinksButton = document.getElementById("get-links");
+		let popOutButton = document.createElement("button");
+		popOutButton.id = "pop-out";
+		popOutButton.innerText = "Pop Out";
+		getLinksButton.after(popOutButton);
+	}
 });
 
 browser.runtime.onMessage.addListener((message) => {
@@ -32,10 +40,12 @@ browser.runtime.onMessage.addListener((message) => {
 		
 		// Create table cell for link
 		let linkCell = document.createElement("td");
+		linkCell.style.border = "2px solid #F00";
 		linkCell.appendChild(link);
 
 		// Create status code element
 		let statusCode = document.createElement("td");
+		statusCode.style.border = "2px solid #F00";
 		statusCode.innerText = message.content.statusCode;
 		
 		// Create table row

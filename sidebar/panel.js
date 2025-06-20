@@ -4,8 +4,10 @@ document.addEventListener("click", function () {
 			file: "/content_scripts/rotten.js",
 		});
 
+		// Clear any existing content
 		let display = document.getElementById("display");
-		display.style.border = "2px solid #F00";
+		display.innerHTML = "";
+		display.style.border = "2px solid #FFF";
 		
 		let tableHeader1 = document.createElement("th");
 		tableHeader1.innerText = "Link";
@@ -18,12 +20,6 @@ document.addEventListener("click", function () {
 		tableHeaderRow.appendChild(tableHeader2);
 
 		display.appendChild(tableHeaderRow);
-		
-		let getLinksButton = document.getElementById("get-links");
-		let popOutButton = document.createElement("button");
-		popOutButton.id = "pop-out";
-		popOutButton.innerText = "Pop Out";
-		getLinksButton.after(popOutButton);
 	}
 });
 
@@ -40,13 +36,19 @@ browser.runtime.onMessage.addListener((message) => {
 		
 		// Create table cell for link
 		let linkCell = document.createElement("td");
-		linkCell.style.border = "2px solid #F00";
+		linkCell.classList.add("browser-style");
 		linkCell.appendChild(link);
+		if (message.content.statusCode != 200) {
+			linkCell.style.border = "2px solid #F00";
+		}
 
 		// Create status code element
 		let statusCode = document.createElement("td");
-		statusCode.style.border = "2px solid #F00";
+		statusCode.classList.add("browser-style");
 		statusCode.innerText = message.content.statusCode;
+		if (message.content.statusCode != 200) {
+			statusCode.style.border = "2px solid #F00";
+		}
 		
 		// Create table row
 		let row = document.createElement("tr");

@@ -24,7 +24,8 @@ async function getLinks() {
 		else {
 			externalLinks.push({
 				href: link.href,
-				text: link.innerText
+				text: link.innerText,
+				statusCode: ""
 			});
 		}
 	}

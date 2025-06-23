@@ -44,23 +44,22 @@ browser.runtime.onMessage.addListener((message) => {
 	let linkCell = document.createElement("td");
 	linkCell.classList.add("browser-style");
 	linkCell.appendChild(link);
-	if (message.content.statusCode != 200) {
-		linkCell.style.border = "2px solid #F00";
-	}
 
 	// Create status code element
 	let statusCode = document.createElement("td");
 	statusCode.classList.add("browser-style");
 	statusCode.innerText = message.content.statusCode;
-	if (message.content.statusCode != 200) {
-		statusCode.style.border = "2px solid #F00";
-	}
 	
 	// Create table row
 	let row = document.createElement("tr");
 	row.appendChild(type);
 	row.appendChild(linkCell);
 	row.appendChild(statusCode);
+	
+	// Change the background color of rotten links
+	if (message.content.statusCode != 200) {
+		row.style.background = "#F00";
+	}
 
 	// Append line to the main display element
 	display.appendChild(row);

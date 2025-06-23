@@ -6,11 +6,11 @@
 	"permissions": ["<all_urls>", "tabs", "find"],
 
 	"sidebar_action": {
-		"default_title": "My Sidebar",
+		"default_title": "Rotten",
 		"default_panel": "sidebar/panel.html",
-		"default_icon": "icons/apple-icon.jpg"
+		"default_icon": "icons/rotten.png"
 	},
-	
+
 	"commands": {
 		"_execute_sidebar_action": {
 			"suggested_key": {

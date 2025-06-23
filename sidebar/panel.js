@@ -35,12 +35,22 @@ browser.runtime.onMessage.addListener((message) => {
 	// Get element for displaying results from panel.html
 	let display = document.getElementById("display");
 
+	// Modify row formatting based on status code
+	let background = "#FFF";
+	let textColor = "000";
+	if (message.content.statusCode != 200) {
+		background = "#F00";
+		textColor = "#FFF";
+	}
+
 	// Create type element
 	let type = document.createElement("td");
 	type.innerText = message.type;
+	type.style.color = textColor;
 
 	// Create text element
 	let linkText = document.createElement("td");
+	linkText.style.color = textColor;
 	if (message.content.text.length != 0) {
 		linkText.innerText = message.content.text;
 	}
@@ -50,6 +60,7 @@ browser.runtime.onMessage.addListener((message) => {
 
 	// Create URL element
 	let link = document.createElement("a");
+	link.style.color = textColor;
 	link.innerText = message.content.href;
 	link.href = message.content.href;
 	
@@ -59,20 +70,16 @@ browser.runtime.onMessage.addListener((message) => {
 
 	// Create status code element
 	let statusCode = document.createElement("td");
-	statusCode.classList.add("browser-style");
+	statusCode.style.color = textColor;
 	statusCode.innerText = message.content.statusCode;
 	
 	// Create table row
 	let row = document.createElement("tr");
+	row.style.background = background;
 	row.appendChild(type);
 	row.appendChild(linkText);
 	row.appendChild(linkCell);
 	row.appendChild(statusCode);
-	
-	// Change the background color of rotten links
-	if (message.content.statusCode != 200) {
-		row.style.background = "#F00";
-	}
 
 	// Append line to the main display element
 	display.appendChild(row);

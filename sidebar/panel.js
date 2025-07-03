@@ -4,19 +4,16 @@ document.addEventListener("click", function () {
 			file: "/content_scripts/rotten.js",
 		});
 
-		// Clear any existing content
+		// Clear any existing table content
 		let display = document.getElementById("display");
 		display.innerHTML = "";
 		display.style.border = "2px solid #FFF";
-
-		if (!document.getElementById("clear")) {
-			let clearButton = document.createElement("button");
-			clearButton.id = "clear";
-			clearButton.innerText = "Clear";
-			let getLinksButton = document.getElementById("get-links");
-			getLinksButton.insertAdjacentElement("afterend", clearButton);
-		}
 		
+		// Set visibility for clear button and clipart
+		document.getElementById("clipart").hidden = true;
+		document.getElementById("clear").hidden = false;
+	
+		// Create table headers
 		let tableHeader0 = document.createElement("th");
 		tableHeader0.innerText = "Type";
 
@@ -29,6 +26,7 @@ document.addEventListener("click", function () {
 		let tableHeader3 = document.createElement("th");
 		tableHeader3.innerText = "Status";
 
+		// Create table row and add to it table headers
 		let tableHeaderRow = document.createElement("tr");
 		tableHeaderRow.appendChild(tableHeader0);
 		tableHeaderRow.appendChild(tableHeader1);
@@ -38,9 +36,12 @@ document.addEventListener("click", function () {
 		display.appendChild(tableHeaderRow);
 	}
 	else if (this.activeElement.id === "clear") {
-		let display = document.getElementById("display");
-		display.innerHTML = "";
-		document.getElementById("clear").remove();
+		// Clear any existing table content
+		document.getElementById("display").innerHTML = "";
+
+		// Set visibility for clear button and clipart
+		document.getElementById("clipart").hidden = false;
+		document.getElementById("clear").hidden = true;
 	}
 });
 

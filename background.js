@@ -5,6 +5,10 @@ async function find(link) {
 	browser.find.highlightResults();
 }
 
+browser.browserAction.onClicked.addListener(() => {
+	browser.sidebarAction.open();
+});
+
 /* Listen for message add accept if it is addressed
  * to this background script. */
 browser.runtime.onMessage.addListener(function (message) {

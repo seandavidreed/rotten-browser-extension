@@ -11,6 +11,12 @@
 		"default_icon": "icons/rotten.png"
 	},
 
+	"browser_action": {
+		"default_icon": {
+			"96": "icons/rotten.png"
+		}
+	},
+
 	"commands": {
 		"_execute_sidebar_action": {
 			"suggested_key": {

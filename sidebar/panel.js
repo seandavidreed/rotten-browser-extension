@@ -59,7 +59,7 @@ browser.runtime.onMessage.addListener(function (message) {
 
 	// Create type element
 	let type = document.createElement("td");
-	type.innerText = message.type;
+	type.innerText = (message.type === "internal") ? "IN" : "EX";
 	type.style.color = textColor;
 
 	// Create text element

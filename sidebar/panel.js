@@ -63,38 +63,46 @@ browser.runtime.onMessage.addListener(function (message) {
 
 	// Create text element
 	let linkText = document.createElement("td");
-	linkText.style.color = textColor;
+	let linkTextDiv = document.createElement("div");
+	linkTextDiv.style.color = textColor;
+	linkTextDiv.classList.add("scrollable");
 	if (message.content.text.length != 0) {
-		linkText.innerText = message.content.text;
+		linkTextDiv.innerText = message.content.text.trim();
 	}
 	else {
-		linkText.innerText = "<No Text>";
+		linkTextDiv.innerText = "<No Text>";
 	}
+	linkText.appendChild(linkTextDiv);
 
 	// Create URL element
 	let link = document.createElement("a");
 	link.style.color = textColor;
-	link.innerText = message.content.href;
+	link.innerText = message.content.href.trim();
 	link.href = message.content.href;
 	
 	// Create td element for URL
 	let linkCell = document.createElement("td");
 	let linkDiv = document.createElement("div");
 	linkDiv.classList.add("scrollable");
-	linkCell.appendChild(link);
-	linkDiv.appendChild(linkCell);
+	linkDiv.appendChild(link);
+	linkCell.appendChild(linkDiv);
 
 	// Create status code element
+	let statusCodeLink = document.createElement("a");
+	statusCodeLink.style.color = textColor;
+	statusCodeLink.innerText = message.content.statusCode;
+	statusCodeLink.href = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/" + message.content.statusCode;
+
+	// Create td element for Status Code URL
 	let statusCode = document.createElement("td");
-	statusCode.style.color = textColor;
-	statusCode.innerText = message.content.statusCode;
-	
+	statusCode.appendChild(statusCodeLink);
+
 	// Create table row
 	let row = document.createElement("tr");
 	row.style.background = background;
 	row.appendChild(type);
 	row.appendChild(linkText);
-	row.appendChild(linkDiv);
+	row.appendChild(linkCell);
 	row.appendChild(statusCode);
 
 	// Append line to the main display element

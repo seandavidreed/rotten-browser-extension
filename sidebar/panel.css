@@ -1,0 +1,43 @@
+body {
+	margin: 5px;
+}
+
+button {
+	margin: 10px;
+	width: 70%;
+	height: 40px;
+	text-align: center;
+	align-self: center;
+
+	border: none;	
+	border-radius: 6px;
+	font-size: 14pt;
+}
+
+button:hover {
+	box-shadow: 3px 3px;
+	background-color: #4CDC83;
+	transition: 0.3s;
+}
+
+#get-links {
+	background-color: #2CBC63;
+}
+
+#clear {
+	background-color: #4C83DC;
+}
+
+table {
+	padding: 10px;
+}
+
+td {
+	border-top: 2px solid #000;
+}
+
+.scrollable {
+	width: 200px;
+	overflow: auto;
+}
+

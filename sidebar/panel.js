@@ -8,6 +8,14 @@ document.addEventListener("click", function () {
 		let display = document.getElementById("display");
 		display.innerHTML = "";
 		display.style.border = "2px solid #FFF";
+
+		if (!document.getElementById("clear")) {
+			let clearButton = document.createElement("button");
+			clearButton.id = "clear";
+			clearButton.innerText = "Clear";
+			let getLinksButton = document.getElementById("get-links");
+			getLinksButton.insertAdjacentElement("afterend", clearButton);
+		}
 		
 		let tableHeader0 = document.createElement("th");
 		tableHeader0.innerText = "Type";
@@ -29,9 +37,14 @@ document.addEventListener("click", function () {
 
 		display.appendChild(tableHeaderRow);
 	}
+	else if (this.activeElement.id === "clear") {
+		let display = document.getElementById("display");
+		display.innerHTML = "";
+		document.getElementById("clear").remove();
+	}
 });
 
-browser.runtime.onMessage.addListener((message) => {
+browser.runtime.onMessage.addListener(function (message) {
 	// Get element for displaying results from panel.html
 	let display = document.getElementById("display");
 
@@ -66,7 +79,10 @@ browser.runtime.onMessage.addListener((message) => {
 	
 	// Create td element for URL
 	let linkCell = document.createElement("td");
+	let linkDiv = document.createElement("div");
+	linkDiv.classList.add("scrollable");
 	linkCell.appendChild(link);
+	linkDiv.appendChild(linkCell);
 
 	// Create status code element
 	let statusCode = document.createElement("td");
@@ -78,7 +94,7 @@ browser.runtime.onMessage.addListener((message) => {
 	row.style.background = background;
 	row.appendChild(type);
 	row.appendChild(linkText);
-	row.appendChild(linkCell);
+	row.appendChild(linkDiv);
 	row.appendChild(statusCode);
 
 	// Append line to the main display element

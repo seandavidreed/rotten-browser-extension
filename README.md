@@ -10,4 +10,4 @@ Clone the repository
 
 Open a Firefox browser and navigate to [](about:debugging).
 
-Select the `This Firefox` tab on the left side and click `Load Temporary Add-on`. Navigate to `rotten-browser-extension/` and select any file, typically `manifest.json` to load the whole extension as a temporary add-on.
+Select the **This Firefox** tab on the left side and click **Load Temporary Add-on**. Navigate to **rotten-browser-extension/** and select any file, typically **manifest.json** to load the whole extension as a temporary add-on.

@@ -5,7 +5,7 @@ Rotten is a simple Firefox extension that roots out link rot. It collects all th
 This browser extension can be used as normal by navigating to [Rotten Mozilla Add-On Page](https://addons.mozilla.org/en-US/firefox/addon/rotten/) and installing it in the Firefox browser from there.
 
 # Test Usage
-Clone the repository
+Clone the repository  
 `git clone https://github.com/seandavidreed/rotten-browser-extension.git`
 
 Open a Firefox browser and navigate to [](about:debugging).

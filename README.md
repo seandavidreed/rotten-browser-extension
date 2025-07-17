@@ -8,6 +8,6 @@ This browser extension can be used as normal by navigating to [Rotten Mozilla Ad
 Clone the repository  
 `git clone https://github.com/seandavidreed/rotten-browser-extension.git`
 
-Open a Firefox browser and navigate to [](about:debugging).
+Open a Firefox browser and enter `about:debugging` in the address bar.
 
-Select the **This Firefox** tab on the left side and click **Load Temporary Add-on**. Navigate to **rotten-browser-extension/** and select any file, typically **manifest.json** to load the whole extension as a temporary add-on.
+Select the **This Firefox** tab on the left side and click **Load Temporary Add-on**. Navigate to **rotten-browser-extension/** and select any file, typically **manifest.json**, to load the whole extension as a temporary add-on.
